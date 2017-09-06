@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +35,7 @@ import com.niit.model.Pay;
 import com.niit.model.ProductInfo;
 import com.niit.model.ShippingAddress;
 import com.niit.model.UserInfo;
+import com.niit.otp.OtpGenerator;
 
 @Controller
 public class OrderController 
@@ -78,8 +81,8 @@ UserDao userDao;
 @Autowired
 List<CartItem> cartItem1;
 
-//@Autowired
-//private JavaMailSender mailSender;
+@Autowired
+private JavaMailSender mailSender;
 	
 String o;
 
@@ -105,7 +108,7 @@ public String orderall(Model model,HttpSession session)
 		model.addAttribute("shippingAddress",new ShippingAddress());
 		session.setAttribute("p",productInfo);
 	}
-	return "addressorder";
+	return "AddressShipping";
 }
 
 @RequestMapping("/Buy/{prdid}/{carti_id}")
@@ -149,11 +152,13 @@ public String payment(@ModelAttribute("shippingAddress")ShippingAddress sh,Model
 //	{
 //		System.out.println("sorry");
 //	}
+//	List<ProductInfo> prod=productDao.list();
 	sh.setUserInfo(userInfo);
 	shippingAddress=sh;
-	model.addAttribute("billing",billing);
-	model.addAttribute("shippingAddress",shippingAddress);
-	model.addAttribute("prot",productInfo);
+	model.addAttribute("billing", billing);
+	model.addAttribute("shippingAddress", shippingAddress);
+	model.addAttribute("prot", productInfo);
+//	model.addAttribute("prod", prod);
 	model.addAttribute("cartItem",cartItem);
 	model.addAttribute("cart",cart);
 	return "orderconfirm";
@@ -170,17 +175,17 @@ public String previous(Model model)
 	return "addressorder";
 }
 
-//@RequestMapping("/pay")
-//public String pay(Model model)
-//{
+@RequestMapping("/pay")
+public String pay(Model model)
+{
 //	List<Card> cards=cardDao.getcardbyUserInfo(userInfo.getuId());
 //	model.addAttribute("cards",cards);
 //	model.addAttribute("card",new Card());
-//
-//	return "payment";
-//}
 
-//@RequestMapping("/payment")
+	return "Payment";
+}
+
+//@RequestMapping("/Payment")
 //public String payment(@RequestParam("otp") String otp,Model model)
 //{
 //	int a;
@@ -218,13 +223,13 @@ public String previous(Model model)
 public String payment(@RequestParam("payb2") String str,Model model)
 {
 	System.out.println(1324);
-	int a;
+//	int a;
 	System.out.println(str);
 	if(str.equals(o))
 	{
-		return "redirect:/thankyou";
+		return "redirect:/Thankyou";
 	}
-	return "redirect:/orderconfirmation";
+	return "redirect:/Thankyou";
 	
 	
 }
@@ -278,8 +283,48 @@ public String orderconfirmation(HttpSession session)
 	order=new Order();
 	orderItem=new OrderItem();
 	System.out.println(565);
-	return "thankyou";
+	return "Thankyou";
 	
 	
 }
+
+@RequestMapping(value="/SendMail")
+public void SendMail() {
+System.out.println(21312);
+Authentication authentication =
+SecurityContextHolder.getContext().getAuthentication();
+if (!(authentication instanceof AnonymousAuthenticationToken)) {
+String currusername = authentication.getName();
+userInfo = userDao.getUseremail(currusername);
+OtpGenerator ot=new OtpGenerator();
+// String o=ot.Otpga();
+o=ot.Otpga();
+String recipientAddress = userInfo.getEmail();
+String subject="OTP";
+//String subject = request.getParameter("subject");
+String message = "your one time password is "+o+" ";
+
+// prints debug info
+System.out.println("To:" + recipientAddress);
+System.out.println("Subject: " + subject);
+System.out.println("Message: " + message);
+
+
+//System.out.println("OTP:"+ otp);
+// creates a simple e-mail object
+SimpleMailMessage email = new SimpleMailMessage();
+email.setTo(recipientAddress);
+email.setSubject(subject);
+email.setText(message);
+//email.setSubject(otp);
+// sends the e-mail
+mailSender.send(email);
+
+
+// forwards to the view named "Result"
+//return "Result";
 }
+}
+}
+
+

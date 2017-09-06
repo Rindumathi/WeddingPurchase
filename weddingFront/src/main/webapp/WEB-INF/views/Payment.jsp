@@ -16,6 +16,16 @@
       <link rel="stylesheet" href="${css}/style.css">
 
   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script>
+ var app = angular.module('myApp', []);
+ app.controller('myCtrl', function($scope, $http){
+$http.get("http://localhost:7006/weddingFront/SendMail")
+});
+ </script>
+ 
 </head>
 
 <body>
@@ -31,7 +41,8 @@
           <span class="amex"></span>
           <span class="discover"></span>
       </div>
-      <form>
+      <c:url value="/payment" var="payb2"/>
+      <form:form action="${pay}" method="post" id="myForm">
           <div class="form-group">
               <label for="NameOnCard">Name on card</label>
               <input id="NameOnCard" class="form-control" type="text" maxlength="255"></input>
@@ -62,13 +73,40 @@
                   <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="Enter the ZIP/Postal code for your credit card billing address."><i class="fa fa-question-circle"></i></a>
               </div>
           </div>
-          <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit">
-              <span class="submit-button-lock"></span>
-              <span class="align-middle">Pay $</span>
-          </button>
-      </form>
+          
+        
+    
+          
+              
+              <div class="container">
+<!--    <div class="panel-group"> -->
+    <div class="panel panel-default"  style= width:150px>
+      <div class="panel-heading" style= width:150px>
+        <h6 class="panel-title" style= width:150px>
+          <a data-toggle="collapse" href="#collapse1">  <input type="submit" class="btn btn-primary" value="Pay"/></a>
+<!--               <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit"> -->
+<!--               <span class="submit-button-lock"></span> -->
+<!--               <span class="align-middle"> -->
+             
+<!--               </span> -->
+               </h6>
+      </div>
+      
+      <div id="collapse1" class="panel-collapse collapse">
+      Please enter your otp:
+        <center><div class="panel-body"><input type="text" ng-app="myApp" ng-controller="myCtrl" name="otp"/></div></center>
+<!--         <div class="panel-footer">Panel Footer</div> -->
+<input type="submit" value="done"/>
+      </div>
+    </div>
   </div>
 </div>
+</div></form:form>
+          </button>
+         
+      
+  </div>
+
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
 

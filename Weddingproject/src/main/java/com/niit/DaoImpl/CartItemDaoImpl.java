@@ -61,7 +61,7 @@ public class CartItemDaoImpl implements CartItemDao
 	
 	public CartItem getListall(String carti_id, String prdid) 
 	{
-		String query="from CartItem where carti_id='"+carti_id+"'";
+		String query="from CartItem where carti_id='"+carti_id+"' and prdid='"+prdid+"'";
 		Query c=sessionFactory.getCurrentSession().createQuery(query);
 		List<CartItem> list= (List<CartItem>) c.list();
 		if(list==null || list.isEmpty())

@@ -155,11 +155,11 @@ left:300px;
   <td>${crt.getProductInfo().getQuantity()}</td>
 <%--   <td>${crt.getCart().getGroand_total()}</td> --%>
 
-  <td><a href="<c:url value='/Remove/${crt.getCarti_id()}'/>">Remove</a>&nbsp/&nbsp<a href="<c:url value='/Buy/${crt.getProductInfo().getPrdid()}/${crt.getCarti_id()}'/>">Buy</a></td>
+  <td><a href="<c:url value='/Remove/${crt.getCarti_id()}'/>">Remove</a>&nbsp;/&nbsp;<a href="<c:url value='/Buy/${crt.getProductInfo().getPrdid()}/${crt.getCarti_id()}'/>">Buy</a></td>
   </tr> </c1:forEach>
 </table>
 <center> <h2>Total price=${gtotal}</h2></center>
-<center> <a href="<c:url value='Removeall'/>">Remove All</a>&nbsp/&nbsp<a href="<c:url value='/Buyall'/>">Buy All</a>
+<center> <a href="<c:url value='/Removeall'/>">Remove All</a>&nbsp;/&nbsp;<a href="<c:url value='/Buyall'/>">Buy All</a>
 </center>
  
 </body>

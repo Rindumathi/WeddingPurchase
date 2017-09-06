@@ -89,6 +89,11 @@ public class HomeController
     {
     	return "Viewcart";
     }
-    
+   
+    @RequestMapping("/Thankyou")
+    public String thank()
+    {
+    	return "Thankyou";
+    }
     
 }

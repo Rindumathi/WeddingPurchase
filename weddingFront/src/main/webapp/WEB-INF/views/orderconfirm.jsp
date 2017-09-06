@@ -194,7 +194,8 @@ button {
   </tr>
   <c1:if test="${prot!=null}">
   <tr>
-  <td><img src="<c:url value='/resources/image/${prot.getPrdid()}.jpg'/>" style="width:120px; height:100px;left:100px;bottom:1px;"></td>
+  
+  <td style="text-align:center"><img src="<c:url value='/resources/image/${prot.getPrdid()}.jpg'/>" style="width:px; height:100px;left:100px;bottom:1px;"></td>
   <td style="text-align:center">${prot.getPrdname()}</td>
   <td style="text-align:center">${prot.getCategoryInfo().getCatname()}</td>
   <td style="text-align:center">${prot.getSupplierInfo().getName()}</td>
@@ -210,6 +211,17 @@ button {
      <td style="text-align:center">${c1.getSupplierInfo().getName()}</td>
      <td style="text-align:center">${c1.getPrice()}</td>
      </tr></c1:forEach></c1:if>
+
+
+<%-- <c1:if test="${cartItem!=null}"> --%>
+<!--   <tr> -->
+<%--    <c1:forEach items="${prod}" var="pro"> --%>
+<%--   <td style="text-align:center"><img src="<c:url value='/resources/image/${pro.getPrdid()}.jpg'/>" style="width:px; height:100px;left:100px;bottom:1px;"></td> --%>
+<%--   <td style="text-align:center">${pro.getPrdname()}</td> --%>
+<%--   <td style="text-align:center">${pro.getCategoryInfo().getCatname()}</td> --%>
+<%--   <td style="text-align:center">${pro.getSupplierInfo().getName()}</td> --%>
+<%--   <td style="text-align:center">${pro.getPrice()}</td> --%>
+<%--   </c1:forEach></tr></c1:if> --%>
 </table>
 <a href="<c:url value="/pay"/>"><button type="Submit" name="Submit" style="color:MediumVioletRed;font-size:20px;">Pay</button></a>
 </body>

@@ -149,6 +149,7 @@ color:red;
 </br> 
 <div class=im><img src="${img}/logo.png" alt=logo style="width:500px"></div>
 </body>
+<%@ include file="footer.jsp" %>
 </html>
 
 

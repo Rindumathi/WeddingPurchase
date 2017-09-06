@@ -173,14 +173,17 @@ position:absolute;
 <input type="text"   placeholder="Enter Username" name="j_username"> <br>
 <input type="password"  placeholder="Enter Password" name="j_password"><br>
 <button type="submit">Sign in</button>
+</div>
+<center><a href="<c:url value="/Forgotpwd"/>">Forgot password?</a></center>
+</div>
 </form:form></fieldset>
-</div>
-</div>
-<center><a href="http://localhost:8080/Frontend/Forgotpwd">Forgot password?</a></center>
+
+
 
 
 
 
 <div class=im><img src="${img}/logo.png" alt=logo style="width:400px"></div>
 </body>
+
 </html>
